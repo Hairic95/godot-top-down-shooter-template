@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/entities/player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/entities/enemies/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/test.gd" type="Script" id=3]
+[ext_resource path="res://assets/textures/battle/arena.png" type="Texture" id=4]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( 99, -99, 99, 99, -99, 99, -99, -99 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( -99, -99, -99, 99, 99, 99, 99, -99 ) ]
+
+[node name="BattleScene" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="CameraHandler" type="Node2D" parent="."]
+position = Vector2( 160, 100 )
+
+[node name="Camera" type="Camera2D" parent="CameraHandler"]
+current = true
+limit_left = -40
+limit_top = -25
+limit_right = 360
+limit_bottom = 255
+limit_smoothed = true
+smoothing_enabled = true
+
+[node name="Arena" type="Sprite" parent="."]
+position = Vector2( 160, 100 )
+texture = ExtResource( 4 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Arena"]
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Arena/StaticBody2D"]
+polygon = PoolVector2Array( -100, -100, 100, -100, 100, 100, -100, 100, -100, -110, -110, -110, -110, 110, 110, 110, 110, -110, -100, -110 )
+
+[node name="NavMap" type="Navigation2D" parent="Arena"]
+visible = false
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Arena/NavMap"]
+navpoly = SubResource( 1 )
+
+[node name="Bullets" type="YSort" parent="."]
+
+[node name="Entities" type="YSort" parent="."]
+
+[node name="Player" parent="Entities" instance=ExtResource( 1 )]
+position = Vector2( 160, 100 )
+
+[node name="Enemy" parent="Entities" instance=ExtResource( 2 )]
+position = Vector2( 125, 35 )
+
+[node name="Enemy2" parent="Entities" instance=ExtResource( 2 )]
+position = Vector2( 205, 50 )
+
+[node name="Enemy3" parent="Entities" instance=ExtResource( 2 )]
+position = Vector2( 222, 103 )
+
+[node name="Enemy4" parent="Entities" instance=ExtResource( 2 )]
+position = Vector2( 97, 153 )
+collision_layer = 0
+
+[node name="Enemy5" parent="Entities" instance=ExtResource( 2 )]
+position = Vector2( 211, 148 )
+
+[node name="Enemy6" parent="Entities" instance=ExtResource( 2 )]
+position = Vector2( 150, 154 )
+
+[node name="Effects" type="YSort" parent="."]

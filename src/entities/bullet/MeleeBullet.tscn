@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/textures/battle/melee_bullet.png" type="Texture" id=1]
+[ext_resource path="res://src/entities/bullet/MeleeBullet.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Bullet"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[node name="MeleeBullet" type="Area2D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+offset = Vector2( 20, 0 )
+hframes = 4
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+anims/Bullet = SubResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 20, 0 )
+polygon = PoolVector2Array( -19.8929, -13.293, -12.4316, -19.8633, 1.88893, -19.9747, 13.9161, -15.9657, 20.041, -8.28166, 20.4864, 7.53179, 14.5842, 15.2158, 2.66846, 20.1157, -11.92, 20.0044, -20.0494, 12.4317 )
+[connection signal="body_entered" from="." to="." method="_on_MeleeBullet_body_entered"]
+[connection signal="animation_finished" from="Anim" to="." method="_on_Anim_animation_finished"]
