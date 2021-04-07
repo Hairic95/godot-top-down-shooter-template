@@ -45,6 +45,7 @@ config/icon="res://icon.png"
 [autoload]
 
 EventBus="*res://src/autoloads/EventBus.gd"
+WaveCreator="*res://src/autoloads/WaveCreator.gd"
 
 [display]
 

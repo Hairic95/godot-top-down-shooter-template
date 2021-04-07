@@ -9,16 +9,27 @@
 position = Vector2( 160, 115 )
 texture = ExtResource( 1 )
 
-[node name="SpecterWave" type="Node2D" parent="."]
+[node name="SpecterWave_001" type="Node2D" parent="."]
 
-[node name="Enemy" parent="SpecterWave" instance=ExtResource( 2 )]
-position = Vector2( 215, 149 )
-movement_rotation = 0.524
+[node name="Enemy" parent="SpecterWave_001" instance=ExtResource( 2 )]
+position = Vector2( 210, 115 )
 
-[node name="Enemy2" parent="SpecterWave" instance=ExtResource( 2 )]
-position = Vector2( 161, 181 )
-movement_rotation = 1.571
+[node name="Enemy2" parent="SpecterWave_001" instance=ExtResource( 2 )]
+position = Vector2( 135, 158 )
+movement_rotation = 2.094
 
-[node name="Enemy3" parent="SpecterWave" instance=ExtResource( 2 )]
-position = Vector2( 105, 149 )
-movement_rotation = 2.617
+[node name="Enemy4" parent="SpecterWave_001" instance=ExtResource( 2 )]
+position = Vector2( 185, 158 )
+movement_rotation = 2.094
+
+[node name="Enemy5" parent="SpecterWave_001" instance=ExtResource( 2 )]
+position = Vector2( 135, 72 )
+movement_rotation = 4.187
+
+[node name="Enemy6" parent="SpecterWave_001" instance=ExtResource( 2 )]
+position = Vector2( 185, 72 )
+movement_rotation = 5.234
+
+[node name="Enemy3" parent="SpecterWave_001" instance=ExtResource( 2 )]
+position = Vector2( 110, 115 )
+movement_rotation = 3.14

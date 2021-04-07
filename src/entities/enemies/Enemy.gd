@@ -1,6 +1,8 @@
 extends KinematicBody2D
 class_name Enemy
 
+export (String) var enemy_type = "enemy"
+
 export (int) var speed = 50
 
 var max_hit_points = 3
@@ -37,6 +39,7 @@ func hurt(damage, push_force, push_direction):
 	if hit_points == 0:
 		if death_effect != null:
 			EventBus.emit_signal("create_effect", death_effect.instance(), global_position)
+		EventBus.emit_signal("enemy_death", enemy_type)
 		queue_free()
 
 func operate_ai(delta):

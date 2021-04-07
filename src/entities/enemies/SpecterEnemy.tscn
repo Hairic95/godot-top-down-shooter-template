@@ -5,6 +5,7 @@
 
 [node name="Enemy" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+enemy_type = "specter"
 speed = 100
 
 [node name="CollisionShape2D" parent="." index="1"]

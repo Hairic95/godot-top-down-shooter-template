@@ -60,6 +60,6 @@ func move_enemy(delta):
 			bullet_push *= .8
 			if bullet_push.length() <= 2:
 				bullet_push = Vector2.ZERO
-			move_and_slide(movement_direction * (speed + (destination - global_position).length() / 10.0) + bullet_push * 3)
+			move_and_slide(movement_direction * (speed + (destination - global_position).length()) + bullet_push * 3)
 		"Attack":
 			move_and_slide(movement_direction * charge_speed + bullet_push * 3)
