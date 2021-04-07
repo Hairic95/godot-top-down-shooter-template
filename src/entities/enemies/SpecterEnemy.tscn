@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/entities/enemies/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/entities/enemies/SpecterEnemy.gd" type="Script" id=2]
+
+[node name="Enemy" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+speed = 100
+
+[node name="CollisionShape2D" parent="." index="1"]
+disabled = true
+
+[node name="ChargeChoiceTimer" type="Timer" parent="." index="4"]
+wait_time = 2.2
+autostart = true
+
+[node name="ChargeTimer" type="Timer" parent="." index="5"]
+wait_time = 0.3
+one_shot = true
+
+[node name="AttackTimer" type="Timer" parent="." index="6"]
+wait_time = 1.5
+one_shot = true
+[connection signal="timeout" from="ChargeChoiceTimer" to="." method="_on_ChargeChoiceTimer_timeout"]
+[connection signal="timeout" from="ChargeTimer" to="." method="_on_ChargeTimer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]

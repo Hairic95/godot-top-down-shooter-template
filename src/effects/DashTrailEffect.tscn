@@ -20,10 +20,10 @@ tracks/0/keys = {
 }
 
 [node name="DashTrailEffect" type="Sprite"]
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color( 1, 1, 1, 0.588235 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Anim" type="AnimationPlayer" parent="."]
 anims/Effect = SubResource( 1 )
-[connection signal="animation_finished" from="Anim" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="Anim" to="." method="_on_Anim_animation_finished"]

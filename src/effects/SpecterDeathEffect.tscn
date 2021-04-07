@@ -22,7 +22,6 @@ tracks/0/keys = {
 [node name="SpecterDeathEffect" type="Sprite"]
 texture = ExtResource( 1 )
 hframes = 4
-frame = 3
 script = ExtResource( 2 )
 
 [node name="Anim" type="AnimationPlayer" parent="."]

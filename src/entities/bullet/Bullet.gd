@@ -1,5 +1,5 @@
 extends Area2D
-class_name Bullet
+class_name PlayerBullet
 
 export (PackedScene) var death_effect
 
@@ -16,8 +16,6 @@ func _physics_process(delta):
 	global_position += direction * speed * delta
 
 func _on_Bullet_body_entered(body):
-	if body is Enemy:
-		body.hurt(damage, push_force, direction)
 	if death_effect != null:
 		EventBus.emit_signal("create_effect", death_effect.instance(), global_position)
 	queue_free()

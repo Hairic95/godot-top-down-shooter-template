@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/entities/player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/entities/enemies/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/entities/enemies/SpecterEnemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/scenes/BattleScene.gd" type="Script" id=3]
 [ext_resource path="res://assets/textures/battle/arena.png" type="Texture" id=4]
 
@@ -12,6 +12,7 @@ outlines = [ PoolVector2Array( -99, -99, -99, 99, 99, 99, 99, -99 ) ]
 
 [node name="BattleScene" type="Node2D"]
 script = ExtResource( 3 )
+arena_borders = Rect2( 65, 25, 200, 200 )
 
 [node name="CameraHandler" type="Node2D" parent="."]
 position = Vector2( 160, 100 )
@@ -50,22 +51,21 @@ navpoly = SubResource( 1 )
 position = Vector2( 160, 100 )
 
 [node name="Enemy" parent="Entities" instance=ExtResource( 2 )]
-position = Vector2( 125, 35 )
+position = Vector2( 124.28, 38.3086 )
 
 [node name="Enemy2" parent="Entities" instance=ExtResource( 2 )]
-position = Vector2( 205, 50 )
+position = Vector2( 174.171, 63.6993 )
 
 [node name="Enemy3" parent="Entities" instance=ExtResource( 2 )]
-position = Vector2( 222, 103 )
+position = Vector2( 211.588, 108.244 )
 
 [node name="Enemy4" parent="Entities" instance=ExtResource( 2 )]
-position = Vector2( 97, 153 )
-collision_layer = 0
+position = Vector2( 126.953, 134.526 )
 
 [node name="Enemy5" parent="Entities" instance=ExtResource( 2 )]
-position = Vector2( 211, 148 )
+position = Vector2( 182.189, 151.453 )
 
 [node name="Enemy6" parent="Entities" instance=ExtResource( 2 )]
-position = Vector2( 150, 154 )
+position = Vector2( 157.244, 135.862 )
 
 [node name="Effects" type="YSort" parent="."]

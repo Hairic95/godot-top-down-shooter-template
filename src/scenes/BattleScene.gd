@@ -1,14 +1,21 @@
 extends Node2D
 
+export (Rect2) var arena_borders
+
 var player
 
 func _ready():
 	$CameraHandler.global_position = $Arena.global_position
 	player = $Entities/Player
 	
+	var i = 0
+	
 	for child in $Entities.get_children():
 		if child is Enemy:
 			child.player = player
+			child.arena_borders = arena_borders
+			child.movement_rotation += 2 * PI / 6 * i
+			i += 1
 	
 	EventBus.connect("create_bullet", self, "create_bullet")
 	EventBus.connect("create_effect", self, "create_effect")

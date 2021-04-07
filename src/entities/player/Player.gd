@@ -6,6 +6,7 @@ var dash_speed = 230
 
 var active = true
 
+
 # todo add pushbox physic
 var pushboxes = []
 
@@ -157,3 +158,6 @@ func _on_ReloadMeleeTimer_timeout():
 
 func _on_DashTimer_timeout():
 	set_state("Idle")
+
+func hurt():
+	pass

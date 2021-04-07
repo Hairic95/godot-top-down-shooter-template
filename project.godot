@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Area2D",
-"class": "Bullet",
-"language": "GDScript",
-"path": "res://src/entities/bullet/Bullet.gd"
-}, {
 "base": "KinematicBody2D",
 "class": "Enemy",
 "language": "GDScript",
@@ -23,11 +18,22 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://src/entities/player/Player.gd"
+}, {
+"base": "Area2D",
+"class": "PlayerBullet",
+"language": "GDScript",
+"path": "res://src/entities/bullet/Bullet.gd"
+}, {
+"base": "Enemy",
+"class": "SpecterEnemy",
+"language": "GDScript",
+"path": "res://src/entities/enemies/SpecterEnemy.gd"
 } ]
 _global_script_class_icons={
-"Bullet": "",
 "Enemy": "",
-"Player": ""
+"Player": "",
+"PlayerBullet": "",
+"SpecterEnemy": ""
 }
 
 [application]
@@ -45,7 +51,7 @@ EventBus="*res://src/autoloads/EventBus.gd"
 window/size/width=320
 window/size/height=230
 window/size/test_width=960
-window/size/test_height=620
+window/size/test_height=690
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
