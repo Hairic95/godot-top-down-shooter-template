@@ -24,13 +24,6 @@ func _ready():
 func _process(delta):
 	operate_ai(delta)
 	
-	var push_force = Vector2.ZERO
-	push_force += bullet_push
-	
-	bullet_push *= .96
-	if bullet_push.length() <= 2:
-		bullet_push = Vector2.ZERO
-	
 	if movement_direction.x < 0:
 		$Sprite.flip_h = false
 	elif movement_direction.x > 0:

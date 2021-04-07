@@ -19,3 +19,10 @@ func _on_Bullet_body_entered(body):
 	if death_effect != null:
 		EventBus.emit_signal("create_effect", death_effect.instance(), global_position)
 	queue_free()
+
+
+func _on_Bullet_area_entered(area):
+	
+	if death_effect != null:
+		EventBus.emit_signal("create_effect", death_effect.instance(), global_position)
+	queue_free()

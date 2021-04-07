@@ -30,6 +30,7 @@ var current_state = "Idle"
 signal create_bullet(bullet_instance, start_direction, direction)
 
 func _ready():
+	set_state("Idle")
 	randomize()
 
 func _process(delta):
