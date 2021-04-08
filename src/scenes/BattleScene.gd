@@ -67,7 +67,7 @@ func create_wave(wave_code):
 					update_specter_enemies()
 
 func enemy_death(enemy_type):
-	yield(get_tree().create_timer(.000001), "timeout")
+	yield(get_tree().create_timer(.0001), "timeout")
 	if enemy_type == "specter":
 		update_specter_enemies()
 
@@ -85,7 +85,6 @@ func update_specter_enemies():
 		if child is SpecterEnemy:
 			child.movement_rotation = 2 * PI / specter_remaining * i
 			i += 1
-
 
 func _on_TestTimer_timeout():
 	create_wave(battle_waves[randi()%battle_waves.size()])

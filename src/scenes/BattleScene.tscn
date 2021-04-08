@@ -53,5 +53,6 @@ position = Vector2( 160, 115 )
 
 [node name="TestTimer" type="Timer" parent="."]
 wait_time = 3.8
+one_shot = true
 autostart = true
 [connection signal="timeout" from="TestTimer" to="." method="_on_TestTimer_timeout"]
