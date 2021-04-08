@@ -4,6 +4,7 @@ export (Vector2) var arena_center = Vector2(160, 115)
 export (Rect2) var arena_borders
 
 var player
+var latest_player_position : Vector2 = Vector2.ZERO
 
 var battle_waves = [
 	"wave_specter_01",
@@ -14,7 +15,7 @@ var battle_waves = [
 func _ready():
 	$CameraHandler.global_position = $Arena.global_position
 	player = $Entities/Player
-	
+	latest_player_position = player.global_position
 	var i = 0
 	
 	EventBus.connect("create_bullet", self, "create_bullet")
@@ -34,22 +35,24 @@ func create_effect(effect_instance, start_pos):
 	$Effects.add_child(effect_instance)
 
 func _process(delta):
-	if player.active:
-		var new_camera_pos =  $Arena.global_position
-		if player.shooting_direction.y < 0:
-			new_camera_pos.y -= 10
-		if player.shooting_direction.y > 0:
-			new_camera_pos.y += 10
-		if player.shooting_direction.x < 0:
-			new_camera_pos.x -= 10
-		if player.shooting_direction.x > 0:
-			new_camera_pos.x += 10
-		if (player.global_position - $Arena.global_position).y > 40:
-			new_camera_pos.y += (player.global_position - $Arena.global_position).y / 5
-		elif (player.global_position - $Arena.global_position).y < 40:
-			new_camera_pos.y += (player.global_position - $Arena.global_position).y / 5
-		
-		$CameraHandler.global_position = new_camera_pos
+	if player != null:
+		latest_player_position = player.global_position
+		if player.active:
+			var new_camera_pos =  $Arena.global_position
+			if player.shooting_direction.y < 0:
+				new_camera_pos.y -= 10
+			if player.shooting_direction.y > 0:
+				new_camera_pos.y += 10
+			if player.shooting_direction.x < 0:
+				new_camera_pos.x -= 10
+			if player.shooting_direction.x > 0:
+				new_camera_pos.x += 10
+			if (player.global_position - $Arena.global_position).y > 40:
+				new_camera_pos.y += (player.global_position - $Arena.global_position).y / 5
+			elif (player.global_position - $Arena.global_position).y < 40:
+				new_camera_pos.y += (player.global_position - $Arena.global_position).y / 5
+			
+			$CameraHandler.global_position = new_camera_pos
 
 func create_wave(wave_code):
 	var wave_data = WaveCreator.get_wave(wave_code)
@@ -59,6 +62,7 @@ func create_wave(wave_code):
 				var enemy_instance = enemy_data.reference.instance()
 				enemy_instance.player = player
 				enemy_instance.arena_borders = arena_borders
+				enemy_instance.latest_player_position = latest_player_position
 				if enemy_instance is SpecterEnemy:
 					var starting_angle = 2 * PI / enemy_data.quantity * i
 					enemy_instance.global_position = arena_center + Vector2(cos(starting_angle), sin(starting_angle)) * 50

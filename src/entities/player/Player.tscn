@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/textures/battle/cultist.png" type="Texture" id=1]
 [ext_resource path="res://src/entities/player/Player.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://src/entities/bullet/MeleeBullet.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/effects/DashTrailEffect.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/sounds/dash.wav" type="AudioStream" id=8]
+[ext_resource path="res://src/effects/CultistDeathEffect.tscn" type="PackedScene" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Dash"
@@ -23,6 +24,9 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 2, 3 ]
 }
+
+[sub_resource type="Animation" id=5]
+resource_name = "Death"
 
 [sub_resource type="Animation" id=2]
 length = 0.5
@@ -64,10 +68,12 @@ script = ExtResource( 2 )
 bullet_reference = ExtResource( 3 )
 melee_reference = ExtResource( 6 )
 dash_effect = ExtResource( 7 )
+death_effect = ExtResource( 9 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 6
+frame = 2
 
 [node name="Gun" type="Sprite" parent="."]
 texture = ExtResource( 5 )
@@ -75,6 +81,7 @@ hframes = 8
 
 [node name="Anim" type="AnimationPlayer" parent="."]
 anims/Dash = SubResource( 1 )
+anims/Death = SubResource( 5 )
 anims/Idle = SubResource( 2 )
 anims/Move = SubResource( 3 )
 

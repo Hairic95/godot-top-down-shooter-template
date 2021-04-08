@@ -16,14 +16,12 @@ func operate_ai(delta):
 			if movement_rotation >= 2 * PI:
 				movement_rotation -= 2 * PI
 			if player != null:
-				destination = player.global_position + Vector2(cos(movement_rotation), sin(movement_rotation)) * distance_to_player
-				if (destination - global_position).length() > 5:
-					movement_direction = (destination - global_position).normalized()
-				else:
-					if $ChargeChoiceTimer.paused:
-						print("self")
-						$ChargeChoiceTimer.start()
-					movement_direction = Vector2.ZERO
+				latest_player_position = player.global_position
+			destination = latest_player_position + Vector2(cos(movement_rotation), sin(movement_rotation)) * distance_to_player
+			if (destination - global_position).length() > 5:
+				movement_direction = (destination - global_position).normalized()
+			else:
+				movement_direction = Vector2.ZERO
 		"Charge":
 			bullet_push = Vector2.ZERO
 			movement_direction = Vector2.ZERO
@@ -39,15 +37,17 @@ func attack():
 	set_state("Charge")
 
 func _on_ChargeTimer_timeout():
-	charge_destination = global_position + (player.global_position - global_position) * 2
-	charge_destination.x = clamp(charge_destination.x, arena_borders.position.x, arena_borders.position.x + arena_borders.size.x)
-	charge_destination.y = clamp(charge_destination.y, arena_borders.position.y, arena_borders.position.y + arena_borders.size.y)
-	set_state("Attack")
+	if player != null:
+		charge_destination = global_position + (player.global_position - global_position) * 2
+		charge_destination.x = clamp(charge_destination.x, arena_borders.position.x, arena_borders.position.x + arena_borders.size.x)
+		charge_destination.y = clamp(charge_destination.y, arena_borders.position.y, arena_borders.position.y + arena_borders.size.y)
+		set_state("Attack")
 
 func _on_ChargeChoiceTimer_timeout():
-	$ChargeChoiceTimer.stop()
-	attack()
-	$AttackTimer.start()
+	if player != null:
+		$ChargeChoiceTimer.stop()
+		attack()
+		$AttackTimer.start()
 
 func _on_AttackTimer_timeout():
 	set_state("Move")

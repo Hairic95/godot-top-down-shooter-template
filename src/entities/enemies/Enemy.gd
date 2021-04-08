@@ -4,6 +4,7 @@ class_name Enemy
 export (String) var enemy_type = "enemy"
 
 export (int) var speed = 50
+export (int) var damage = 1
 
 var max_hit_points = 3
 var hit_points = 3
@@ -17,6 +18,8 @@ var movement_direction = Vector2.ZERO
 var bullet_push = Vector2.ZERO
 
 var arena_borders = Rect2(0, 0, 100, 100)
+
+var latest_player_position = Vector2.ZERO
 
 export (PackedScene) var death_effect
 
@@ -63,4 +66,4 @@ func _on_Hitbox_area_entered(area):
 
 func _on_HurtBox_body_entered(body):
 	if body is Player:
-		body.hurt()
+		body.hurt(damage)

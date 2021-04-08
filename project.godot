@@ -93,6 +93,7 @@ dash={
 2d_physics/layer_2="PlayerBullets"
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="EnemyBullets"
+2d_physics/layer_20="Death"
 
 [rendering]
 

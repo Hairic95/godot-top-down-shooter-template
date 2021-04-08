@@ -6,6 +6,8 @@ var dash_speed = 230
 
 var active = true
 
+var max_hit_points = 4
+var hit_points = 4
 
 # todo add pushbox physic
 var pushboxes = []
@@ -24,6 +26,7 @@ var dash_timer_value = 0
 export (PackedScene) var bullet_reference
 export (PackedScene) var melee_reference
 export (PackedScene) var dash_effect
+export (PackedScene) var death_effect
 
 var current_state = "Idle"
 
@@ -160,5 +163,11 @@ func _on_ReloadMeleeTimer_timeout():
 func _on_DashTimer_timeout():
 	set_state("Idle")
 
-func hurt():
-	pass
+func hurt(damage):
+	hit_points = max(0, hit_points - damage)
+	if hit_points == 0:
+		set_state("Death")
+		active = false
+		EventBus.emit_signal("player_death")
+		EventBus.emit_signal("create_effect", death_effect.instance(), global_position)
+		queue_free()
