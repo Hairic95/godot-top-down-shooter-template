@@ -42,6 +42,7 @@ func _on_ChargeTimer_timeout():
 		charge_destination.x = clamp(charge_destination.x, arena_borders.position.x, arena_borders.position.x + arena_borders.size.x)
 		charge_destination.y = clamp(charge_destination.y, arena_borders.position.y, arena_borders.position.y + arena_borders.size.y)
 		set_state("Attack")
+		set_hurtbox_disabled(false)
 
 func _on_ChargeChoiceTimer_timeout():
 	if player != null:
@@ -50,6 +51,7 @@ func _on_ChargeChoiceTimer_timeout():
 		$AttackTimer.start()
 
 func _on_AttackTimer_timeout():
+	set_hurtbox_disabled(true)
 	set_state("Move")
 	movement_rotation += PI
 	$ChargeChoiceTimer.start()
@@ -63,3 +65,8 @@ func move_enemy(delta):
 			move_and_slide(movement_direction * (speed + (destination - global_position).length()) + bullet_push * 3)
 		"Attack":
 			move_and_slide(movement_direction * charge_speed + bullet_push * 3)
+
+func reset_timer():
+	if state == "Move":
+		$ChargeChoiceTimer.stop()
+		$ChargeChoiceTimer.start()

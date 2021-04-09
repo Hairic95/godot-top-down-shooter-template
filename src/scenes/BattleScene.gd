@@ -16,10 +16,13 @@ func _ready():
 	$CameraHandler.global_position = $Arena.global_position
 	player = $Entities/Player
 	latest_player_position = player.global_position
-	var i = 0
+	
+	player_health_update(player.hit_points, player.max_hit_points)
 	
 	EventBus.connect("create_bullet", self, "create_bullet")
 	EventBus.connect("create_effect", self, "create_effect")
+	
+	EventBus.connect("player_health_update", self, "player_health_update")
 	
 	EventBus.connect("enemy_death", self, "enemy_death")
 	
@@ -88,7 +91,18 @@ func update_specter_enemies():
 	for child in $Entities.get_children():
 		if child is SpecterEnemy:
 			child.movement_rotation = 2 * PI / specter_remaining * i
+			child.reset_timer()
 			i += 1
 
 func _on_TestTimer_timeout():
 	create_wave(battle_waves[randi()%battle_waves.size()])
+
+func player_health_update(current_hit_points, max_hit_points):
+	if $UI/Hearts.get_child_count() != max_hit_points:
+		# TODO Spawn/remove heart Containers
+		pass
+	for i in $UI/Hearts.get_child_count():
+		if i < current_hit_points:
+			 $UI/Hearts.get_child(i).restore()
+		else:
+			 $UI/Hearts.get_child(i).deplete()

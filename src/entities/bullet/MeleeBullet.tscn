@@ -35,5 +35,6 @@ anims/Bullet = SubResource( 1 )
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2( 20, 0 )
 polygon = PoolVector2Array( -19.8929, -13.293, -12.4316, -19.8633, 1.88893, -19.9747, 13.9161, -15.9657, 20.041, -8.28166, 20.4864, 7.53179, 14.5842, 15.2158, 2.66846, 20.1157, -11.92, 20.0044, -20.0494, 12.4317 )
+[connection signal="area_entered" from="." to="." method="_on_MeleeBullet_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_MeleeBullet_body_entered"]
 [connection signal="animation_finished" from="Anim" to="." method="_on_Anim_animation_finished"]

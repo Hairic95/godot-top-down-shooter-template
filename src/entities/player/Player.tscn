@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/textures/battle/cultist.png" type="Texture" id=1]
 [ext_resource path="res://src/entities/player/Player.gd" type="Script" id=2]
@@ -9,6 +9,22 @@
 [ext_resource path="res://src/effects/DashTrailEffect.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/sounds/dash.wav" type="AudioStream" id=8]
 [ext_resource path="res://src/effects/CultistDeathEffect.tscn" type="PackedScene" id=9]
+
+[sub_resource type="Animation" id=7]
+resource_name = "Blink"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 0.509804 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.509804 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.556863 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "Dash"
@@ -25,10 +41,35 @@ tracks/0/keys = {
 "values": [ 2, 3 ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "Death"
-
 [sub_resource type="Animation" id=2]
+resource_name = "Death"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Gun:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -43,8 +84,32 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Gun:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -59,9 +124,82 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 1, 2, 3, 4, 5 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Gun:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "Blink"
+
+[sub_resource type="AnimationNodeOneShot" id=12]
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "Dash"
+
+[sub_resource type="AnimationNodeBlend2" id=17]
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "Death"
+
+[sub_resource type="AnimationNodeBlend2" id=14]
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "Move"
+
+[sub_resource type="AnimationNodeBlend2" id=15]
+
+[sub_resource type="AnimationNodeBlendTree" id=8]
+graph_offset = Vector2( -600, -114.5 )
+nodes/Blink/node = SubResource( 11 )
+nodes/Blink/position = Vector2( -160, 380 )
+nodes/BlinkOneShot/node = SubResource( 12 )
+nodes/BlinkOneShot/position = Vector2( 140, 220 )
+nodes/Dash/node = SubResource( 16 )
+nodes/Dash/position = Vector2( -420, 240 )
+nodes/DashBlend/node = SubResource( 17 )
+nodes/DashBlend/position = Vector2( -80, 80 )
+nodes/Death/node = SubResource( 13 )
+nodes/Death/position = Vector2( 120, 440 )
+nodes/DeathBlend/node = SubResource( 14 )
+nodes/DeathBlend/position = Vector2( 360, 320 )
+nodes/Idle/node = SubResource( 10 )
+nodes/Idle/position = Vector2( -580, -20 )
+nodes/Move/node = SubResource( 9 )
+nodes/Move/position = Vector2( -580, 120 )
+nodes/MovementBlend/node = SubResource( 15 )
+nodes/MovementBlend/position = Vector2( -320, -40 )
+nodes/output/position = Vector2( 600, 360 )
+node_connections = [ "output", 0, "DeathBlend", "MovementBlend", 0, "Idle", "MovementBlend", 1, "Move", "DeathBlend", 0, "BlinkOneShot", "DeathBlend", 1, "Death", "DashBlend", 0, "MovementBlend", "DashBlend", 1, "Dash", "BlinkOneShot", 0, "DashBlend", "BlinkOneShot", 1, "Blink" ]
+
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 5, 5 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 4, 4 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -73,22 +211,36 @@ death_effect = ExtResource( 9 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 6
-frame = 2
 
 [node name="Gun" type="Sprite" parent="."]
 texture = ExtResource( 5 )
 hframes = 8
 
 [node name="Anim" type="AnimationPlayer" parent="."]
+anims/Blink = SubResource( 7 )
 anims/Dash = SubResource( 1 )
-anims/Death = SubResource( 5 )
-anims/Idle = SubResource( 2 )
-anims/Move = SubResource( 3 )
+anims/Death = SubResource( 2 )
+anims/Idle = SubResource( 3 )
+anims/Move = SubResource( 4 )
+
+[node name="AnimTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 8 )
+anim_player = NodePath("../Anim")
+active = true
+parameters/BlinkOneShot/active = false
+parameters/DashBlend/blend_amount = 0
+parameters/DeathBlend/blend_amount = 0.0
+parameters/MovementBlend/blend_amount = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="MeleeBullets" type="Node2D" parent="."]
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource( 6 )
 
 [node name="Timers" type="Node" parent="."]
 
@@ -102,6 +254,10 @@ wait_time = 0.7
 wait_time = 0.4
 one_shot = true
 
+[node name="AfterDamageIFrameTimer" type="Timer" parent="Timers"]
+wait_time = 0.6
+one_shot = true
+
 [node name="Sounds" type="Node" parent="."]
 
 [node name="ShootSound" type="AudioStreamPlayer" parent="Sounds"]
@@ -110,6 +266,8 @@ volume_db = -24.0
 
 [node name="DashSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 8 )
+[connection signal="area_entered" from="HitBox" to="." method="_on_HitBox_area_entered"]
 [connection signal="timeout" from="Timers/ReloadTimer" to="." method="_on_ReloadTimer_timeout"]
 [connection signal="timeout" from="Timers/ReloadMeleeTimer" to="." method="_on_ReloadMeleeTimer_timeout"]
 [connection signal="timeout" from="Timers/DashTimer" to="." method="_on_DashTimer_timeout"]
+[connection signal="timeout" from="Timers/AfterDamageIFrameTimer" to="." method="_on_AfterDamageIFrameTimer_timeout"]

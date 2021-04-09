@@ -30,9 +30,13 @@ export (PackedScene) var death_effect
 
 var current_state = "Idle"
 
+var is_invulnerable : bool = false
+
 signal create_bullet(bullet_instance, start_direction, direction)
 
 func _ready():
+	$AnimTree.active = true
+	
 	set_state("Idle")
 	randomize()
 
@@ -105,9 +109,25 @@ func _process(delta):
 	set_gun_sprite()
 
 func set_state(new_state):
+	match(new_state):
+		"Idle":
+			$AnimTree.set("parameters/MovementBlend/blend_amount", 0)
+			$AnimTree.set("parameters/DashBlend/blend_amount", 0)
+			$AnimTree.set("parameters/DeathBlend/blend_amount", 0)
+		"Move":
+			$AnimTree.set("parameters/MovementBlend/blend_amount", 1)
+			$AnimTree.set("parameters/DashBlend/blend_amount", 0)
+			$AnimTree.set("parameters/DeathBlend/blend_amount", 0)
+		"Dash":
+			$AnimTree.set("parameters/MovementBlend/blend_amount", 0)
+			$AnimTree.set("parameters/DashBlend/blend_amount", 1)
+			$AnimTree.set("parameters/DeathBlend/blend_amount", 0)
+		"Death":
+			$AnimTree.set("parameters/MovementBlend/blend_amount", 0)
+			$AnimTree.set("parameters/DashBlend/blend_amount", 0)
+			$AnimTree.set("parameters/DeathBlend/blend_amount", 1)
 	if new_state != current_state:
 		current_state = new_state
-		$Anim.play(new_state)
 
 func set_gun_sprite():
 	match (shooting_direction):
@@ -164,10 +184,24 @@ func _on_DashTimer_timeout():
 	set_state("Idle")
 
 func hurt(damage):
-	hit_points = max(0, hit_points - damage)
-	if hit_points == 0:
-		set_state("Death")
-		active = false
-		EventBus.emit_signal("player_death")
-		EventBus.emit_signal("create_effect", death_effect.instance(), global_position)
-		queue_free()
+	if !is_invulnerable:
+		hit_points = max(0, hit_points - damage)
+		EventBus.emit_signal("player_health_update", hit_points, max_hit_points)
+		if hit_points == 0:
+			set_state("Death")
+			active = false
+			EventBus.emit_signal("player_death")
+			EventBus.emit_signal("create_effect", death_effect.instance(), global_position)
+			queue_free()
+		else:
+			$AnimTree.set("parameters/BlinkOneShot/active", 1)
+			$Timers/AfterDamageIFrameTimer.start()
+			is_invulnerable = true
+
+func _on_HitBox_area_entered(area):
+	if area is EnemyHurtBox:
+		hurt(area.damage)
+
+func _on_AfterDamageIFrameTimer_timeout():
+	is_invulnerable = false
+

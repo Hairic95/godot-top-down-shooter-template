@@ -1,4 +1,5 @@
 extends Area2D
+class_name PlayerBulletMelee
 
 var enemies = []
 
@@ -13,8 +14,5 @@ func _ready():
 func _on_Anim_animation_finished(anim_name):
 	queue_free()
 
-func _on_MeleeBullet_body_entered(body):
-	if body is Enemy:
-		if !enemies.has(body):
-			enemies.append(body)
-			body.hurt(damage, push_force, direction)
+func _on_MeleeBullet_area_entered(area):
+	pass # Replace with function body.

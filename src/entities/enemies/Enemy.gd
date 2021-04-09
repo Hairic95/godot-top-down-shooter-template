@@ -61,9 +61,12 @@ func _on_Anim_animation_finished(anim_name):
 	pass
 
 func _on_Hitbox_area_entered(area):
-	if area is PlayerBullet:
+	if area is PlayerBullet || area is PlayerBulletMelee:
 		hurt(1, (global_position - area.global_position).normalized(), area.push_force)
 
 func _on_HurtBox_body_entered(body):
 	if body is Player:
 		body.hurt(damage)
+
+func set_hurtbox_disabled(value):
+	$HurtBox/CollisionShape2D.disabled = value
