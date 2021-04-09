@@ -99,6 +99,7 @@ func _process(delta):
 		if collider:
 			$Timers/DashTimer.stop()
 			set_state("Idle")
+			is_invulnerable = false
 	
 	var push_force = Vector2.ZERO
 	for pushbox in pushboxes:
@@ -166,6 +167,7 @@ func swing_melee():
 
 func dash():
 	set_state("Dash")
+	is_invulnerable = true
 	if movement_direction == Vector2.ZERO:
 		dash_direction = latest_direction
 	else:
@@ -182,6 +184,7 @@ func _on_ReloadMeleeTimer_timeout():
 
 func _on_DashTimer_timeout():
 	set_state("Idle")
+	is_invulnerable = false
 
 func hurt(damage):
 	if !is_invulnerable:
