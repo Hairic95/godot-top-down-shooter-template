@@ -56,11 +56,15 @@ func create_paint_mask(mask_global_position, mask_texture, paint_color):
 	for x in mask_image.get_width():
 		for y in mask_image.get_height():
 			if mask_image.get_pixel(x, y).a == 1:
+				
 				var final_pixel = mask_global_position + Vector2(x, y) + image.get_size() / 2 - mask_image.get_size() / 2
 				var image_rect = Rect2(0, 0, image.get_width(), image.get_height())
 				if image_rect.has_point(final_pixel):
 					if arena_mask_image.get_pixelv(final_pixel).a != 0:
-						image.set_pixelv(final_pixel, paint_color)
+						if mask_image.get_pixel(x, y).r == 1 && image.get_pixelv(final_pixel).a != 1:
+							image.set_pixelv(final_pixel, paint_color * .7)
+						else:image.set_pixelv(final_pixel, paint_color)
+							
 	
 	var new_texture = ImageTexture.new()
 	new_texture.create_from_image(image, Texture.FLAG_VIDEO_SURFACE)

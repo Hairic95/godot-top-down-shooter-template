@@ -5,7 +5,7 @@ func _ready():
 	$Anim.play("Effect_001")
 
 func set_writing():
-	$Writing/Label.text = "Spooky Time"
+	$Writing/Label.text = "Paint Time"
 
 func _on_Anim_animation_finished(anim_name):
-	EventBus.emit_signal("change_scene", "battle")
+	EventBus.emit_signal("change_scene", "paint")

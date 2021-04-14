@@ -1,6 +1,8 @@
 extends Player
 class_name PaintPlayer
 
+export (String, "red", "blue", "yellow", "green") var player_id = "red"
+
 export (Color) var paint_color
 
 var move_paint_timer = .05

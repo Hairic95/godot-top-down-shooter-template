@@ -39,24 +39,25 @@ visible = false
 [node name="Entities" type="YSort" parent="."]
 
 [node name="Player1" parent="Entities" instance=ExtResource( 1 )]
-modulate = Color( 0.976471, 0.639216, 0.105882, 1 )
-position = Vector2( 0, -42 )
-paint_color = Color( 0.976471, 0.639216, 0.105882, 1 )
+modulate = Color( 0, 0.6, 0.858824, 1 )
+position = Vector2( 0, -45 )
+player_id = "blue"
+paint_color = Color( 0, 0.6, 0.858824, 1 )
 
 [node name="Player2" parent="Entities" instance=ExtResource( 1 )]
-modulate = Color( 0.705882, 0.12549, 0.164706, 1 )
-position = Vector2( 0, 47 )
-paint_color = Color( 0.705882, 0.12549, 0.164706, 1 )
-
-[node name="Player3" parent="Entities" instance=ExtResource( 1 )]
-modulate = Color( 0.0784314, 0.627451, 0.180392, 1 )
-position = Vector2( -54, 0 )
-paint_color = Color( 0.0784314, 0.627451, 0.180392, 1 )
-
-[node name="Player4" parent="Entities" instance=ExtResource( 1 )]
-modulate = Color( 0.141176, 0.623529, 0.870588, 1 )
-position = Vector2( 53, 0 )
-paint_color = Color( 0.141176, 0.623529, 0.870588, 1 )
+modulate = Color( 0.894118, 0.231373, 0.266667, 1 )
+position = Vector2( 0, 45 )
+commands = {
+"move_down": 75,
+"move_left": 74,
+"move_right": 76,
+"move_up": 73,
+"shoot_down": 16777234,
+"shoot_left": 16777231,
+"shoot_right": 16777233,
+"shoot_up": 16777232
+}
+paint_color = Color( 0.894118, 0.231373, 0.266667, 1 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 5

@@ -34,6 +34,17 @@ var is_invulnerable : bool = false
 
 signal create_bullet(bullet_instance, start_direction, direction)
 
+export (Dictionary) var commands = {
+	"move_up": KEY_W,
+	"move_down": KEY_S,
+	"move_left": KEY_A,
+	"move_right": KEY_D,
+	"shoot_up": KEY_UP,
+	"shoot_down": KEY_DOWN,
+	"shoot_left": KEY_LEFT,
+	"shoot_right": KEY_RIGHT
+}
+
 func _ready():
 	$AnimTree.active = true
 	
@@ -46,36 +57,36 @@ func _process(delta):
 	
 	if active and current_state != "Dash":
 			
-		if Input.is_key_pressed(KEY_W):
+		if Input.is_key_pressed(commands.move_up):
 			movement_direction.y = -1
 			latest_direction = Vector2.UP
-		if Input.is_key_pressed(KEY_S):
+		if Input.is_key_pressed(commands.move_down):
 			movement_direction.y = 1
 			latest_direction = Vector2.DOWN
-		if Input.is_key_pressed(KEY_A):
+		if Input.is_key_pressed(commands.move_left):
 			movement_direction.x = -1
 			latest_direction = Vector2.LEFT
 			$Sprite.flip_h = false
-		if Input.is_key_pressed(KEY_D):
+		if Input.is_key_pressed(commands.move_right):
 			movement_direction.x = 1
 			latest_direction = Vector2.RIGHT
 			$Sprite.flip_h = true
 		
 		
-		if Input.is_key_pressed(KEY_W) || Input.is_key_pressed(KEY_S) || Input.is_key_pressed(KEY_A) || Input.is_key_pressed(KEY_D):
+		if Input.is_key_pressed(commands.move_up) || Input.is_key_pressed(commands.move_down) || Input.is_key_pressed(commands.move_left) || Input.is_key_pressed(commands.move_right):
 			set_state("Move")
 		else:
 			set_state("Idle")
 		
-		if Input.is_key_pressed(KEY_UP):
+		if Input.is_key_pressed(commands.shoot_up):
 			shooting_direction.y = -1
-		if Input.is_key_pressed(KEY_DOWN):
+		if Input.is_key_pressed(commands.shoot_down):
 			shooting_direction.y = 1
-		if Input.is_key_pressed(KEY_RIGHT):
+		if Input.is_key_pressed(commands.shoot_right):
 			shooting_direction.x = 1
-		if Input.is_key_pressed(KEY_LEFT):
+		if Input.is_key_pressed(commands.shoot_left):
 			shooting_direction.x = -1
-		if Input.is_key_pressed(KEY_UP) || Input.is_key_pressed(KEY_DOWN) || Input.is_key_pressed(KEY_RIGHT) || Input.is_key_pressed(KEY_LEFT):
+		if Input.is_key_pressed(commands.shoot_up) || Input.is_key_pressed(commands.shoot_down) || Input.is_key_pressed(commands.shoot_left) || Input.is_key_pressed(commands.shoot_right):
 			if !is_reloading && !Input.is_key_pressed(KEY_SHIFT):
 				is_reloading = true
 				shoot()
