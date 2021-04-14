@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/entities/player/PaintPlayer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/scenes/PaintBattleScene.gd" type="Script" id=2]
+[ext_resource path="res://assets/textures/battle/arena.png" type="Texture" id=3]
+[ext_resource path="res://assets/textures/battle/arena_mask3.png" type="Texture" id=4]
+[ext_resource path="res://assets/textures/battle/arena_paint_base.png" type="Texture" id=5]
+
+[node name="PaintBattleScene" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="CameraHandler" type="Node2D" parent="."]
+
+[node name="Camera" type="Camera2D" parent="CameraHandler"]
+current = true
+limit_left = -175
+limit_top = -130
+limit_right = 175
+limit_bottom = 130
+smoothing_enabled = true
+
+[node name="ArenaBackground" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+
+[node name="ArenaMask" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 4 )
+
+[node name="ArenaPaint" type="Sprite" parent="."]
+texture = ExtResource( 5 )
+
+[node name="PaintMasks" type="Node2D" parent="."]
+visible = false
+
+[node name="Effects" type="YSort" parent="."]
+
+[node name="Bullets" type="YSort" parent="."]
+
+[node name="Entities" type="YSort" parent="."]
+
+[node name="Player1" parent="Entities" instance=ExtResource( 1 )]
+modulate = Color( 0.976471, 0.639216, 0.105882, 1 )
+position = Vector2( 0, -42 )
+paint_color = Color( 0.976471, 0.639216, 0.105882, 1 )
+
+[node name="Player2" parent="Entities" instance=ExtResource( 1 )]
+modulate = Color( 0.705882, 0.12549, 0.164706, 1 )
+position = Vector2( 0, 47 )
+paint_color = Color( 0.705882, 0.12549, 0.164706, 1 )
+
+[node name="Player3" parent="Entities" instance=ExtResource( 1 )]
+modulate = Color( 0.0784314, 0.627451, 0.180392, 1 )
+position = Vector2( -54, 0 )
+paint_color = Color( 0.0784314, 0.627451, 0.180392, 1 )
+
+[node name="Player4" parent="Entities" instance=ExtResource( 1 )]
+modulate = Color( 0.141176, 0.623529, 0.870588, 1 )
+position = Vector2( 53, 0 )
+paint_color = Color( 0.141176, 0.623529, 0.870588, 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 5
+collision_mask = 5
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PoolVector2Array( -100, -100, 100, -100, 100, 101, -101, 101, -100, -112, -108, -112, -109, 109, 109, 110, 109, -115, -100, -112 )

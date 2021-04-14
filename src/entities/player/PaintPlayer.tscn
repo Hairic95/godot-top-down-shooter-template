@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/entities/player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/entities/player/PaintPlayer.gd" type="Script" id=2]
+[ext_resource path="res://src/entities/bullet/PaintBullet.tscn" type="PackedScene" id=3]
+
+[node name="Player" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+bullet_reference = ExtResource( 3 )
+paint_color = Color( 0.854902, 0.878431, 0.917647, 1 )

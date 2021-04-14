@@ -19,6 +19,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/entities/enemies/EnemyHurtBox.gd"
 }, {
+"base": "Player",
+"class": "PaintPlayer",
+"language": "GDScript",
+"path": "res://src/entities/player/PaintPlayer.gd"
+}, {
+"base": "PlayerBullet",
+"class": "PaintPlayerBullet",
+"language": "GDScript",
+"path": "res://src/entities/bullet/PaintBullet.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
@@ -42,6 +52,8 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Enemy": "",
 "EnemyHurtBox": "",
+"PaintPlayer": "",
+"PaintPlayerBullet": "",
 "Player": "",
 "PlayerBullet": "",
 "PlayerBulletMelee": "",

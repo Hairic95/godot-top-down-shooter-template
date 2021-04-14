@@ -60,16 +60,17 @@ autostart = true
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Hearts" type="Node2D" parent="UI"]
-position = Vector2( 24, 22 )
+position = Vector2( 14, 13 )
+scale = Vector2( 0.5, 0.5 )
 
 [node name="Sprite" parent="UI/Hearts" instance=ExtResource( 2 )]
 
 [node name="Sprite2" parent="UI/Hearts" instance=ExtResource( 2 )]
-position = Vector2( 0, 28 )
+position = Vector2( 26, 0 )
 
 [node name="Sprite3" parent="UI/Hearts" instance=ExtResource( 2 )]
-position = Vector2( 0, 57 )
+position = Vector2( 50, 0 )
 
 [node name="Sprite4" parent="UI/Hearts" instance=ExtResource( 2 )]
-position = Vector2( 0, 86 )
+position = Vector2( 74, 0 )
 [connection signal="timeout" from="TestTimer" to="." method="_on_TestTimer_timeout"]
