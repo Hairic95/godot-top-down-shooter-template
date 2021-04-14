@@ -10,4 +10,4 @@ func _process(delta):
 
 func _on_Anim_animation_finished(anim_name):
 	if anim_name == "Selected":
-		EventBus.emit_signal("change_scene", "battle")
+		EventBus.emit_signal("change_scene", "writing")

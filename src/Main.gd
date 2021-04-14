@@ -1,8 +1,9 @@
 extends Node
 
 var scenes = {
-	"main_menu": load("res://src/scenes/MainMenuScene.tscn"),
-	"battle": load("res://src/scenes/BattleScene.tscn")
+	"main_menu": preload("res://src/scenes/MainMenuScene.tscn"),
+	"battle": preload("res://src/scenes/BattleScene.tscn"),
+	"writing": preload("res://src/scenes/WritingScene.tscn")
 }
 
 func _ready():
