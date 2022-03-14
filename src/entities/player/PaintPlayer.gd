@@ -11,10 +11,10 @@ var move_paint_timer_value = .05
 var color_index = 0
 var available_paint_colors = [
 	Color("#2967d1"),
-	Color("#63c74d"),
+	Color("#f3474d"),
 	Color("#feae34"),
-	Color("#0095e9"),
-	Color("#e31024")
+	Color("#10d589"),
+	Color("#8095e9")
 ]
 
 func _ready():
@@ -33,7 +33,7 @@ func _process(delta):
 		if color_index == available_paint_colors.size():
 			color_index = 0
 		paint_color = available_paint_colors[color_index]
-	elif Input.is_action_just_pressed("prev"):
+	if Input.is_action_just_pressed("prev"):
 		color_index -= 1
 		if color_index < 0:
 			color_index = available_paint_colors.size() - 1

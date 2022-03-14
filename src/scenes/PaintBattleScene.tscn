@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/scenes/PaintBattleScene.gd" type="Script" id=1]
 [ext_resource path="res://assets/shaders/dithering shader.tres" type="Material" id=2]
-[ext_resource path="res://assets/textures/battle/arena_mask.png" type="Texture" id=3]
+[ext_resource path="res://assets/textures/battle/arena_mask2.png" type="Texture" id=3]
 [ext_resource path="res://assets/textures/battle/arena.png" type="Texture" id=4]
 [ext_resource path="res://assets/textures/battle/arena_paint_base.png" type="Texture" id=5]
 
@@ -48,12 +48,13 @@ polygon = PoolVector2Array( -134, 138, 125, 140, 131, -140, -101, -141, -101, -1
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Label" type="Label" parent="CanvasLayer"]
-margin_left = 228.0
-margin_top = 199.0
-margin_right = 319.0
+margin_left = 192.0
+margin_top = 182.0
+margin_right = 320.0
 margin_bottom = 230.0
 text = "R to Reset
-ESC to go back"
+ESC to go back
+Q/E to switch colors"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
