@@ -1,5 +1,7 @@
 extends Node2D
 
+var self_reference = load("res://src/scenes/BattleScene.tscn")
+
 export (Vector2) var arena_center = Vector2(160, 115)
 export (Rect2) var arena_borders
 
@@ -9,9 +11,9 @@ var latest_player_position : Vector2 = Vector2.ZERO
 var wave_index = 0
 
 var battle_waves = [
-	"wave_specter_01",
+	"wave_eyeball_01",
 	"wave_specter_02",
-	"wave_specter_03"
+	"wave_mixed_01"
 ]
 
 func _ready():
@@ -30,6 +32,12 @@ func _ready():
 	
 	create_wave(battle_waves[0])
 
+func _input(event):
+	if Input.is_action_pressed("reset"):
+		EventBus.emit_signal("create_scene", self_reference)
+	elif Input.is_action_just_pressed("ui_cancel"):
+		EventBus.emit_signal("change_scene", "level_select")
+
 func create_bullet(bullet_instance, start_pos, direction):
 	bullet_instance.global_position = start_pos
 	bullet_instance.direction = direction.normalized()
@@ -40,7 +48,7 @@ func create_effect(effect_instance, start_pos):
 	$Effects.add_child(effect_instance)
 
 func _process(delta):
-	if player != null:
+	if player != null && weakref(player).get_ref():
 		latest_player_position = player.global_position
 		if player.active:
 			var new_camera_pos =  $Arena.global_position
@@ -69,15 +77,15 @@ func create_wave(wave_code):
 				enemy_instance.player = player
 				enemy_instance.arena_borders = arena_borders
 				enemy_instance.latest_player_position = latest_player_position
-				if enemy_instance is SpecterEnemy:
-					var starting_angle = 2 * PI / enemy_data.quantity * i
-					enemy_instance.global_position = arena_center + Vector2(cos(starting_angle), sin(starting_angle)) * 50
+				#if enemy_instance is SpecterEnemy:
+				var starting_angle = 2 * PI / enemy_data.quantity * i
+				enemy_instance.global_position = arena_center + Vector2(cos(starting_angle), sin(starting_angle)) * 50
 				$Entities.add_child(enemy_instance)
 				if enemy_instance is SpecterEnemy:
 					update_specter_enemies()
 
-func enemy_death(enemy_type):
-	yield(get_tree().create_timer(.0001), "timeout")
+func enemy_death(position, enemy_type):
+	yield(get_tree().create_timer(.001), "timeout")
 	var remaining_enemy = 0
 	for child in $Entities.get_children():
 		if child is Enemy:
@@ -115,9 +123,7 @@ func player_health_update(current_hit_points, max_hit_points):
 
 func check_next_wave():
 	if wave_index >= battle_waves.size():
-		show_portal()
+		# TODO: Go to next level
+		pass
 	else:
 		create_wave(battle_waves[wave_index])
-
-func show_portal():
-	pass

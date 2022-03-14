@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cultist_gun.png-1fd88f6a46e7b54bfdbc995321c28ecd.stex"
+path="res://.import/rocks_small.png-20c3d6d6f2d3169bce225f1ff22e9463.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/battle/cultist_gun.png"
-dest_files=[ "res://.import/cultist_gun.png-1fd88f6a46e7b54bfdbc995321c28ecd.stex" ]
+source_file="res://assets/textures/battle/terrains/rocks_small.png"
+dest_files=[ "res://.import/rocks_small.png-20c3d6d6f2d3169bce225f1ff22e9463.stex" ]
 
 [params]
 

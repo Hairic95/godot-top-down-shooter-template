@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/scenes/LevelSelectionScene.gd" type="Script" id=1]
+[ext_resource path="res://src/level/LevelSelector.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/fonts/Sins.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/textures/level_selection/selector.png" type="Texture" id=4]
+[ext_resource path="res://src/scenes/PaintBattleScene.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/scenes/BattleScene.tscn" type="PackedScene" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 3 )
+
+[node name="LevelSelection" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="CameraHandler" type="Node2D" parent="."]
+
+[node name="Camera" type="Camera2D" parent="CameraHandler"]
+current = true
+smoothing_enabled = true
+
+[node name="Sprite" type="Sprite" parent="CameraHandler"]
+texture = ExtResource( 4 )
+
+[node name="Levels" type="Node2D" parent="."]
+
+[node name="LevelSelector" parent="Levels" instance=ExtResource( 2 )]
+battle_level = ExtResource( 6 )
+level_title = "Normal Battle"
+
+[node name="LevelSelector2" parent="Levels" instance=ExtResource( 2 )]
+position = Vector2( 32, 0 )
+battle_level = ExtResource( 5 )
+level_title = "Paint Room"
+grid_position = Vector2( 1, 0 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="TitleLevel" type="Label" parent="UI"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 82.0
+margin_bottom = 30.0
+custom_fonts/font = SubResource( 1 )
+text = "Level Title"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -15,7 +15,7 @@ func operate_ai(delta):
 			movement_rotation += delta
 			if movement_rotation >= 2 * PI:
 				movement_rotation -= 2 * PI
-			if player != null:
+			if player != null && weakref(player).get_ref():
 				latest_player_position = player.global_position
 			destination = latest_player_position + Vector2(cos(movement_rotation), sin(movement_rotation)) * distance_to_player
 			if (destination - global_position).length() > 5:
@@ -37,7 +37,7 @@ func attack():
 	set_state("Charge")
 
 func _on_ChargeTimer_timeout():
-	if player != null:
+	if player != null && weakref(player).get_ref():
 		charge_destination = global_position + (player.global_position - global_position) * 2
 		charge_destination.x = clamp(charge_destination.x, arena_borders.position.x, arena_borders.position.x + arena_borders.size.x)
 		charge_destination.y = clamp(charge_destination.y, arena_borders.position.y, arena_borders.position.y + arena_borders.size.y)
@@ -45,7 +45,7 @@ func _on_ChargeTimer_timeout():
 		set_hurtbox_disabled(false)
 
 func _on_ChargeChoiceTimer_timeout():
-	if player != null:
+	if player != null && weakref(player).get_ref():
 		$ChargeChoiceTimer.stop()
 		attack()
 		$AttackTimer.start()

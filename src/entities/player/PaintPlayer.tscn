@@ -7,4 +7,5 @@
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 bullet_reference = ExtResource( 3 )
-paint_color = Color( 0.854902, 0.878431, 0.917647, 1 )
+player_id = "blue"
+paint_color = Color( 0.160784, 0.403922, 0.819608, 1 )

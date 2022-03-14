@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/entities/enemies/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/textures/battle/enemies/eyeball.png" type="Texture" id=2]
+[ext_resource path="res://src/entities/enemies/EyeballEnemy.gd" type="Script" id=3]
+
+[node name="Enemy" instance=ExtResource( 1 )]
+collision_mask = 2147483664
+script = ExtResource( 3 )
+speed = 65
+death_effect = null
+
+[node name="Sprite" parent="." index="0"]
+position = Vector2( 0, -6 )
+texture = ExtResource( 2 )
+hframes = 6
+frame = 2
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = true
+position = Vector2( 0, -6 )
+
+[node name="Hitbox" parent="." index="2"]
+position = Vector2( 0, -6 )
+
+[node name="HurtBox" parent="." index="3"]
+position = Vector2( 0, -6 )
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+disabled = false
+
+[editable path="HurtBox"]

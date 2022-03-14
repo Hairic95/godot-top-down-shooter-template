@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cultist.png-9d4ef52566766b403c3614fc7f2dc885.stex"
+path="res://.import/level_border.png-c38cc5b3e5114229385ca80f5fa4ea56.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/battle/cultist.png"
-dest_files=[ "res://.import/cultist.png-9d4ef52566766b403c3614fc7f2dc885.stex" ]
+source_file="res://assets/textures/level_selection/level_border.png"
+dest_files=[ "res://.import/level_border.png-c38cc5b3e5114229385ca80f5fa4ea56.stex" ]
 
 [params]
 

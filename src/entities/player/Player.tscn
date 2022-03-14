@@ -1,14 +1,15 @@
 [gd_scene load_steps=27 format=2]
 
-[ext_resource path="res://assets/textures/battle/cultist.png" type="Texture" id=1]
+[ext_resource path="res://assets/textures/battle/characters/cultist_gun.png" type="Texture" id=1]
 [ext_resource path="res://src/entities/player/Player.gd" type="Script" id=2]
 [ext_resource path="res://src/entities/bullet/Bullet.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sounds/shoot.wav" type="AudioStream" id=4]
-[ext_resource path="res://assets/textures/battle/cultist_gun.png" type="Texture" id=5]
+[ext_resource path="res://assets/textures/battle/characters/cultist.png" type="Texture" id=5]
 [ext_resource path="res://src/entities/bullet/MeleeBullet.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/effects/DashTrailEffect.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/sounds/dash.wav" type="AudioStream" id=8]
 [ext_resource path="res://src/effects/CultistDeathEffect.tscn" type="PackedScene" id=9]
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "Blink"
@@ -191,10 +192,10 @@ nodes/Move/position = Vector2( -580, 120 )
 nodes/MovementBlend/node = SubResource( 14 )
 nodes/MovementBlend/position = Vector2( -320, -40 )
 nodes/output/position = Vector2( 600, 360 )
-node_connections = [ "output", 0, "DeathBlend", "DeathBlend", 0, "BlinkOneShot", "DeathBlend", 1, "Death", "MovementBlend", 0, "Idle", "MovementBlend", 1, "Move", "DashBlend", 0, "MovementBlend", "DashBlend", 1, "Dash", "BlinkOneShot", 0, "DashBlend", "BlinkOneShot", 1, "Blink" ]
+node_connections = [ "output", 0, "DeathBlend", "DashBlend", 0, "MovementBlend", "DashBlend", 1, "Dash", "DeathBlend", 0, "BlinkOneShot", "DeathBlend", 1, "Death", "BlinkOneShot", 0, "DashBlend", "BlinkOneShot", 1, "Blink", "MovementBlend", 0, "Idle", "MovementBlend", 1, "Move" ]
 
-[sub_resource type="RectangleShape2D" id=16]
-extents = Vector2( 5, 5 )
+[sub_resource type="CircleShape2D" id=18]
+radius = 5.38516
 
 [sub_resource type="RectangleShape2D" id=17]
 extents = Vector2( 4, 4 )
@@ -207,11 +208,11 @@ dash_effect = ExtResource( 7 )
 death_effect = ExtResource( 9 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
+texture = ExtResource( 5 )
 hframes = 6
 
 [node name="Gun" type="Sprite" parent="."]
-texture = ExtResource( 5 )
+texture = ExtResource( 1 )
 hframes = 8
 
 [node name="Anim" type="AnimationPlayer" parent="."]
@@ -231,7 +232,8 @@ parameters/DeathBlend/blend_amount = 0.0
 parameters/MovementBlend/blend_amount = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 16 )
+rotation = 1.5708
+shape = SubResource( 18 )
 
 [node name="MeleeBullets" type="Node2D" parent="."]
 

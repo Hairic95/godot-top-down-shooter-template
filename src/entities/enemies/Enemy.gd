@@ -42,7 +42,7 @@ func hurt(damage, push_force, push_direction):
 	if hit_points == 0:
 		if death_effect != null:
 			EventBus.emit_signal("create_effect", death_effect.instance(), global_position)
-		EventBus.emit_signal("enemy_death", enemy_type)
+		EventBus.emit_signal("enemy_death", global_position, enemy_type)
 		queue_free()
 
 func operate_ai(delta):
